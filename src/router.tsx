@@ -1,6 +1,5 @@
 // import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "./components/Layout";
 import { ErrorBoundary } from "react-error-boundary";

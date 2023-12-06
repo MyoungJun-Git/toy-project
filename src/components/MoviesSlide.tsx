@@ -23,13 +23,13 @@ const responsive = {
   },
 };
 
-const MoviesSlide = ({ results }: any) => {
+const MoviesSlide = ({ movieData }: any) => {
   return (
     <Carousel responsive={responsive}>
-      {data.map((item: IMoviesCardData) => (
+      {movieData.map((item: IMoviesCardData) => (
         <MoviesCardView
           moviesCardClass={{
-            cardClassName: "banner",
+            cardClassName: "card",
           }}
           moviesCardData={{
             poster_path: item?.poster_path,

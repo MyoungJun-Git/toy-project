@@ -10,7 +10,8 @@ import { ApiConfig } from "../api/ApiConfig";
  */
 export const getMoviesData = async () => {
   const response = await ApiConfig.get(
-    `movie/popular?language=en-US&page=1`
+    // `movie/popular?language=en-US&page=1`
+    `trending/movie/week?language=ko&page=1`
   ).then((result: any) => result.data.results);
   return response;
 };

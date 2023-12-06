@@ -10,6 +10,8 @@ import {
 
 const Home = () => {
   /**
+   * ! https://my-json-server.typicode.com/MyoungJun-Git/toy-project/db
+   *
    * suspense의 옵션을 true로 할 경우 waterfall..
    * suspense의 옵션을 false 및 default의 경우 병렬처리로 진행
    *
@@ -47,13 +49,13 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <Banner data={results[0]} />
+      <Banner movieData={results[0].data} />
       <h1>Top Popular Movies</h1>
-      <MoviesSlide data={results[0]} />
+      <MoviesSlide movieData={results[0].data} />
       <h1>Top Rated Movies</h1>
-      <MoviesSlide data={results[1]} />
+      <MoviesSlide movieData={results[1].data} />
       <h1>Upcoming Movies</h1>
-      <MoviesSlide data={results[2]} />
+      <MoviesSlide movieData={results[2].data} />
     </React.Fragment>
   );
 };

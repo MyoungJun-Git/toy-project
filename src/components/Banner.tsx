@@ -1,6 +1,6 @@
 import BannerView from "./BannerView";
 
-const Banner = ({ data }: any) => {
+const Banner = ({ movieData }: any) => {
   const bannerClass = {
     bannerClassName: "banner",
     bannerInfoClassName: "banner-info",
@@ -10,9 +10,9 @@ const Banner = ({ data }: any) => {
     <BannerView
       bannerClass={bannerClass}
       bannerData={{
-        posterPath: data[0].poster_path,
-        title: data[0].title,
-        overview: data[0].overview,
+        posterPath: movieData[0].poster_path,
+        title: movieData[0].title,
+        overview: movieData[0].overview,
       }}
     />
   );
