@@ -9,13 +9,12 @@ import axios from "axios";
 export const ApiConfig = axios.create({
   // baseURL: `https://api.themoviedb.org/3/`,
   // baseURL: `https://my-json-server.typicode.com/MyoungJun-Git/toy-project/posts/`,
-  baseURL: `http://localhost:3000/posts/`,
+  baseURL: `http://localhost:3000/`,
   headers: {
-    Accept: "application/json",
     "Content-Type": "application/json",
     // Authorization: `Bearer ${moviesToken}`,
   },
-  maxContentLength: -1,
-  maxBodyLength: -1,
+  // maxContentLength: -1,
+  // maxBodyLength: -1,
   // maxBodyLength: 1000000000,
 });

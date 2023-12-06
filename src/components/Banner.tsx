@@ -10,9 +10,9 @@ const Banner = ({ movieData }: any) => {
     <BannerView
       bannerClass={bannerClass}
       bannerData={{
-        posterPath: movieData[0].poster_path,
-        title: movieData[0].title,
-        overview: movieData[0].overview,
+        posterPath: movieData[3]?.poster_path,
+        title: movieData[3]?.title,
+        overview: movieData[3]?.overview,
       }}
     />
   );

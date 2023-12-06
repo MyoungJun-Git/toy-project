@@ -52,9 +52,11 @@ const Home = () => {
     ],
   });
 
-  // useEffect(() => {
-  //   console.log({ results });
-  // }, [results]);
+  console.log(results[0].data);
+
+  //   useEffect(() => {
+  //     console.log({ results });
+  //   }, [results]);
 
   return (
     /**
