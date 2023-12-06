@@ -44,6 +44,7 @@ const MoviesSlide = ({ movieData, movieGenreData }: any) => {
             vote_average: item?.vote_average,
             adult: item?.adult,
           }}
+          moviesGenreData={movieGenreData}
         />
       ))}
     </Carousel>

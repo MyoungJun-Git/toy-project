@@ -1,7 +1,11 @@
 import { Badge } from "react-bootstrap";
-import { IMoviesCard } from "../interface/IMovies";
+import { IMoviesCard, IMoviesGenreData } from "../interface/IMovies";
 
-const MoviesCardView = ({ moviesCardClass, moviesCardData }: IMoviesCard) => {
+const MoviesCardView = ({
+  moviesCardClass,
+  moviesCardData,
+  moviesGenreData,
+}: IMoviesCard & any) => {
   return (
     <div
       className={moviesCardClass.cardClassName}
@@ -17,7 +21,10 @@ const MoviesCardView = ({ moviesCardClass, moviesCardData }: IMoviesCard) => {
         <div>
           {moviesCardData.genre_ids.map((id: number, index: number) => (
             <Badge key={index} bg={moviesCardClass.cardChildBadgeClassName}>
-              {id}
+              {
+                moviesGenreData.find((item: IMoviesGenreData) => item.id === id)
+                  .name
+              }
             </Badge>
           ))}
         </div>

@@ -4,6 +4,12 @@ export interface IMoviesCardClass {
   cardChildBadgeClassName: string;
 }
 
+export interface IMoviesGenreData {
+  id: number;
+  name: string;
+}
+[];
+
 export interface IMoviesCardData {
   poster_path: string;
   title: string;
