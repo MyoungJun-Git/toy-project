@@ -31,3 +31,10 @@ export const getUpcomingMoviesData = async () => {
 
   return response;
 };
+
+export const getGenreMoviesData = async () => {
+  const response = await ApiConfig.get(
+    `genre/movie/list?language=ko&page=1`
+  ).then((result: any) => result.data.genres);
+  return response;
+};

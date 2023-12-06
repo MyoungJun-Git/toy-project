@@ -23,18 +23,24 @@ const responsive = {
   },
 };
 
-const MoviesSlide = ({ movieData }: any) => {
+const MoviesSlide = ({ movieData, movieGenreData }: any) => {
+  /**
+   * id가 같으면 name..
+   */
   return (
     <Carousel responsive={responsive}>
-      {movieData.map((item: IMoviesCardData) => (
+      {movieData.map((item: IMoviesCardData, index: number) => (
         <MoviesCardView
+          key={index}
           moviesCardClass={{
             cardClassName: "card",
+            cardChildClassName: "overlay",
+            cardChildBadgeClassName: "danger",
           }}
           moviesCardData={{
             poster_path: item?.poster_path,
             title: item?.title,
-            genre_ids: item?.genre_ids,
+            genre_ids: item.genre_ids,
             vote_average: item?.vote_average,
             adult: item?.adult,
           }}

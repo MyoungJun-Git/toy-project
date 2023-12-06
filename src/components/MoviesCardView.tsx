@@ -12,16 +12,18 @@ const MoviesCardView = ({ moviesCardClass, moviesCardData }: IMoviesCard) => {
           ")",
       }}
     >
-      <div>
+      <div className={moviesCardClass.cardChildClassName}>
         <h3>{moviesCardData.title}</h3>
         <div>
-          {moviesCardData.genre_ids.map((id: number) => (
-            <Badge bg="danger">{id}</Badge>
+          {moviesCardData.genre_ids.map((id: number, index: number) => (
+            <Badge key={index} bg={moviesCardClass.cardChildBadgeClassName}>
+              {id}
+            </Badge>
           ))}
         </div>
         <div>
-          <span>{moviesCardData.vote_average}</span>
-          <span>{moviesCardData.adult ? "청불" : "Under 18"}</span>
+          <div>{moviesCardData.vote_average}</div>
+          <div>{moviesCardData.adult ? "청불" : "Under 18"}</div>
         </div>
       </div>
     </div>

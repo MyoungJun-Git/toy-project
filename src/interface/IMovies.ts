@@ -1,5 +1,7 @@
 export interface IMoviesCardClass {
   cardClassName: string;
+  cardChildClassName: string;
+  cardChildBadgeClassName: string;
 }
 
 export interface IMoviesCardData {

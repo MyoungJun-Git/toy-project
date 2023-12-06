@@ -1,8 +1,9 @@
 import Banner from "./Banner";
 import MoviesSlide from "./MoviesSlide";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSuspenseQueries } from "@tanstack/react-query";
 import {
+  getGenreMoviesData,
   getMoviesData,
   getTopRatedMoviesData,
   getUpcomingMoviesData,
@@ -44,18 +45,38 @@ const Home = () => {
         queryKey: ["upcomingMoviesData"],
         queryFn: getUpcomingMoviesData,
       },
+      {
+        queryKey: ["genreMoviesData"],
+        queryFn: getGenreMoviesData,
+      },
     ],
   });
 
+  useEffect(() => {
+    console.log({ results });
+  }, [results]);
+
   return (
+    /**
+     * ! 이부분 컴포넌트 map으로 활용하기
+     */
     <React.Fragment>
       <Banner movieData={results[0].data} />
       <h1>Top Popular Movies</h1>
-      <MoviesSlide movieData={results[0].data} />
+      <MoviesSlide
+        movieData={results[0].data}
+        movieGenreData={results[3].data}
+      />
       <h1>Top Rated Movies</h1>
-      <MoviesSlide movieData={results[1].data} />
+      <MoviesSlide
+        movieData={results[1].data}
+        movieGenreData={results[3].data}
+      />
       <h1>Upcoming Movies</h1>
-      <MoviesSlide movieData={results[2].data} />
+      <MoviesSlide
+        movieData={results[2].data}
+        movieGenreData={results[3].data}
+      />
     </React.Fragment>
   );
 };
