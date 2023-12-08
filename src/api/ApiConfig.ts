@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios'
 
 /**
  * * ApiConfig.ts file은  baseURL 및 headers에 대한 공통적인 부분을 관리하기 위함의 파일임.
@@ -7,15 +7,15 @@ import axios from "axios";
 // const moviesToken = import.meta.env.VITE_MOVIES_TOKEN;
 
 export const ApiConfig = axios.create({
-  // baseURL: `https://api.themoviedb.org/3/`,
-  // baseURL: `https://my-json-server.typicode.com/MyoungJun-Git/toy-project/posts/`,
-  baseURL: `http://localhost/`,
-  headers: {
-    "Content-Type": "application/json",
-    // Authorization: `Bearer ${moviesToken}`,
-  }
+    // baseURL: `https://api.themoviedb.org/3/`,
+    // baseURL: `https://my-json-server.typicode.com/MyoungJun-Git/toy-project/posts/`,
+    baseURL: `http://localhost/`,
+    headers: {
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${moviesToken}`,
+    },
 
-  // maxContentLength: -1,
-  // maxBodyLength: -1,
-  // maxBodyLength: 1000000000,
-});
+    // maxContentLength: -1,
+    // maxBodyLength: -1,
+    // maxBodyLength: 1000000000,
+})

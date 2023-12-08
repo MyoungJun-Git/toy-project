@@ -1,16 +1,16 @@
 export interface IBannerClass {
-  bannerClassName: string;
-  bannerInfoClassName: string;
+    bannerClassName: string;
+    bannerInfoClassName: string;
 }
 
 export interface IBannerData {
-  posterPath: string;
-  title: string;
-  overview: string;
+    posterPath: string;
+    title: string;
+    overview: string;
 }
 
 export interface IBanner {
-  bannerClass: IBannerClass;
-  // DATA
-  bannerData: IBannerData;
+    bannerClass: IBannerClass;
+    // DATA
+    bannerData: IBannerData;
 }

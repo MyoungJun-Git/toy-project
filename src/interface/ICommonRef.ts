@@ -1,5 +1,4 @@
-export interface ICommonRef {
-    current: {
+export interface ICommonRef {current: {
         value: string
     }
 }
