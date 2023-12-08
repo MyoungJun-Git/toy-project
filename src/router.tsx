@@ -9,7 +9,7 @@ import Spinners from "./components/Spinners";
 
 const Home = lazy(() => import("./components/Home"));
 const MoviesDetail = lazy(() => import("./components/MoviesDetail"));
-const Movies = lazy(() => import("./components/Movies"));
+// const Movies = lazy(() => import("./components/Movies"));
 
 const router = createBrowserRouter([
   {
@@ -26,16 +26,16 @@ const router = createBrowserRouter([
           </ErrorBoundary>
         ),
       },
-      {
-        path: "movies",
-        element: (
-          <ErrorBoundary fallback={<Error />}>
-            <Suspense fallback={<Spinners />}>
-              <Movies />
-            </Suspense>
-          </ErrorBoundary>
-        ),
-      },
+      // {
+      //   path: "movies",
+      //   element: (
+      //     <ErrorBoundary fallback={<Error />}>
+      //       <Suspense fallback={<Spinners />}>
+      //         <Movies />
+      //       </Suspense>
+      //     </ErrorBoundary>
+      //   ),
+      // },
       {
         path: "movies/:id",
         element: (

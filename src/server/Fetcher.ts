@@ -40,3 +40,36 @@ export const getGenreMoviesData = async () => {
   ).then((res: any) => res.data);
   return response;
 };
+
+export const deleteMoviesData = async (
+  moviesType: string,
+  moviesId: number
+) => {
+  const response = await ApiConfig.delete(moviesType + "/" + moviesId).then(
+    (res: any) => res.data
+  );
+  return response;
+};
+
+export const updateMoviesData = async (
+    moviesType: string,
+    moviesId: number,
+    moviesTitle: any,
+) => {
+  const response = await ApiConfig.patch(moviesType + "/" + moviesId, {
+    "title": moviesTitle
+  }).then(
+      (res: any) => res.data
+  );
+  return response;
+};
+
+// ! exmaple..
+// export const deleteMoviesData = async (moviesId: number) => {
+//   const response = await ApiConfig.delete(`popular`, {
+//     data: {
+//       id: moviesId,
+//     },
+//   }).then((res: any) => res.data);
+//   return response;
+// };

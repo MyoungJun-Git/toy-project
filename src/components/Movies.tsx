@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 // import {
 //   getTopRatedMoviesData,
 //   getUpcomingMoviesData,
@@ -21,7 +21,6 @@ const Movies = () => {
   //   );
 
   return (
-    <React.Fragment>
       {/* {moviesData.error ? (
         <React.Fragment>Oh no, there was an error</React.Fragment>
       ) : moviesData.isLoading ? (
@@ -33,7 +32,6 @@ const Movies = () => {
           </div>
         ))
       ) : null} */}
-    </React.Fragment>
   );
 };
 
