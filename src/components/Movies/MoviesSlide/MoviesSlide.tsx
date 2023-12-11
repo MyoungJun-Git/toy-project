@@ -34,6 +34,7 @@ const MoviesSlide = ({ type, movieData, movieGenreData }: any) => {
             return deleteMoviesData(type, id)
         },
         onSuccess: () => {
+            alert('삭제 완료');
             queryClient.invalidateQueries({
                 queryKey: [type],
             })
@@ -57,6 +58,7 @@ const MoviesSlide = ({ type, movieData, movieGenreData }: any) => {
             return createMoviesData(type, data)
         },
         onSuccess: () => {
+            alert('관심 추가 완료');
             queryClient.invalidateQueries({
                 queryKey: [type],
             })
@@ -136,6 +138,7 @@ const MoviesSlide = ({ type, movieData, movieGenreData }: any) => {
                 <MoviesSlideView
                     key={index}
                     moviesCardClass={{
+                        cardType: type,
                         cardClassName: 'card',
                         cardChildClassName: 'overlay',
                         cardChildBadgeClassName: 'danger',
@@ -150,6 +153,7 @@ const MoviesSlide = ({ type, movieData, movieGenreData }: any) => {
                         title: item?.title,
                         genre_ids: item.genre_ids,
                         vote_average: item?.vote_average,
+                        overview: item?.overview,
                         adult: item?.adult,
                     }}
                     moviesGenreData={movieGenreData}

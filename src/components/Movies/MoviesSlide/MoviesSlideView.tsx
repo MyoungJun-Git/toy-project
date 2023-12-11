@@ -39,6 +39,7 @@ const MoviesSlideView = ({
                     <div>{moviesCardData.adult ? '청불' : 'Under 18'}</div>
                 </div>
                 <Button
+                    hidden={moviesCardClass.cardType === 'favorite'}
                     className={moviesCardClass.carChildBtnClassName}
                     variant={moviesCardClass.cardChildCreateBtnVariant}
                     onClick={() => createMoviesData({
@@ -47,6 +48,7 @@ const MoviesSlideView = ({
                         'title': moviesCardData.title,
                         'genre_ids': moviesCardData.genre_ids,
                         'vote_average': moviesCardData.vote_average,
+                        'overview': moviesCardData.overview,
                         'adult': moviesCardData.adult,
                     })}>
                     관심

@@ -76,11 +76,21 @@ export const createMoviesData = async (
         'title': reqData.title,
         'genre_ids': reqData.genre_ids,
         'vote_average': reqData.vote_average,
+        'overview': reqData.overview,
         'adult': reqData.adult,
     }).then(
         (res: any) => res.data,
     )
 
+    return response
+}
+
+export const getFavoriteData = async () => {
+    const response = await ApiConfig.get(
+        // `movie/popular?language=en-US&page=1`
+        // `trending/movie/week?language=ko&page=1`
+        `favorite`,
+    ).then((res: any) => res.data)
     return response
 }
 

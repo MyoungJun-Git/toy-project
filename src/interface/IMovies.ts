@@ -19,6 +19,7 @@ export interface IMoviesCardData {
     title: string
     genre_ids: number[]
     vote_average: string
+    overview: string
     adult: boolean
 }
 

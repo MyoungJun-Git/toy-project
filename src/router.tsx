@@ -8,7 +8,7 @@ import Error from './components/Error/Error.tsx'
 import Spinners from './components/Spinners/Spinners.tsx'
 
 const Home = lazy(() => import('./components/Layout/Home.tsx'))
-const MoviesDetail = lazy(() => import('./components/MoviesDetail'))
+const MoviesDetail = lazy(() => import('./components/Movies/MoviesDetail/MoviesDetail.tsx'))
 const MoviesFavorite = lazy(() => import("./components/Movies/MoviesFavorite/MoviesFavorite"));
 
 const router = createBrowserRouter([
