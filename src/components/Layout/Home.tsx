@@ -1,5 +1,5 @@
-import Banner from "./Banner";
-import MoviesSlide from "./MoviesSlide";
+import Banner from "../Banner/Banner.tsx";
+import MoviesSlide from "../MoviesSlide/MoviesSlide.tsx";
 import React from "react";
 import {useSuspenseQueries} from "@tanstack/react-query";
 import {
@@ -7,7 +7,7 @@ import {
     getMoviesData,
     getTopRatedMoviesData,
     getUpcomingMoviesData,
-} from "../server/Fetcher";
+} from "../../server/Fetcher.ts";
 
 const Home = () => {
     /**

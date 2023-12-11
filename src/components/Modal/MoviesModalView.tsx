@@ -1,9 +1,9 @@
 import Modal from 'react-bootstrap/Modal'
-import { ImoviesModal } from '../interface/IMovies'
+import { ImoviesModal } from '../../interface/IMovies.ts'
 import { useRef } from 'react'
 import Button from 'react-bootstrap/Button'
 
-const MoviesModal = ({ show, onHide, moviesData, updateMutation }: ImoviesModal) => {
+const MoviesModalView = ({ show, onHide, moviesData, updateMutation }: ImoviesModal) => {
     const titleRef = useRef(null)
     return (
         <Modal show={show} onHide={onHide} aria-labelledby="contained-modal-title-vcenter" centered>
@@ -34,4 +34,4 @@ const MoviesModal = ({ show, onHide, moviesData, updateMutation }: ImoviesModal)
     )
 }
 
-export default MoviesModal
+export default MoviesModalView

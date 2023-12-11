@@ -1,4 +1,4 @@
-import { IBanner } from "../interface/IBanner";
+import { IBanner } from "../../interface/IBanner.ts";
 
 const BannerView = ({ bannerClass, bannerData }: IBanner) => {
   return (

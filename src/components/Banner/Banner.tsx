@@ -1,4 +1,4 @@
-import BannerView from "./BannerView";
+import BannerView from "./BannerView.tsx";
 
 const Banner = ({ movieData }: any) => {
   const bannerClass = {

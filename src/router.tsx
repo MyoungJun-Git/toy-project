@@ -1,13 +1,13 @@
 // import React from "react";
 import { createBrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Layout from './components/Layout'
+import Layout from './components/Layout/Layout.tsx'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Suspense, lazy } from 'react'
-import Error from './components/Error'
-import Spinners from './components/Spinners'
+import Error from './components/Error/Error.tsx'
+import Spinners from './components/Spinners/Spinners.tsx'
 
-const Home = lazy(() => import('./components/Home'))
+const Home = lazy(() => import('./components/Layout/Home.tsx'))
 const MoviesDetail = lazy(() => import('./components/MoviesDetail'))
 // const Movies = lazy(() => import("./components/Movies"));
 

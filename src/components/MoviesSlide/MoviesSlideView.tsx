@@ -1,10 +1,10 @@
 import { Badge } from 'react-bootstrap'
-import { IMoviesCard, IMoviesGenreData } from '../interface/IMovies'
+import { IMoviesCard, IMoviesGenreData } from '../../interface/IMovies.ts'
 import Button from 'react-bootstrap/Button'
-import MoviesModal from '../components/MoviesModal'
+import MoviesModalView from '../Modal/MoviesModalView.tsx'
 import { useState } from 'react'
 
-const MoviesCardView = ({
+const MoviesSlideView = ({
     moviesCardClass,
     moviesCardData,
     moviesGenreData,
@@ -51,7 +51,7 @@ const MoviesCardView = ({
                     삭제
                 </Button>
             </div>
-            <MoviesModal
+            <MoviesModalView
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 moviesData={moviesCardData}
@@ -61,4 +61,4 @@ const MoviesCardView = ({
     )
 }
 
-export default MoviesCardView
+export default MoviesSlideView
