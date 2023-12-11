@@ -9,7 +9,7 @@ import Spinners from './components/Spinners/Spinners.tsx'
 
 const Home = lazy(() => import('./components/Layout/Home.tsx'))
 const MoviesDetail = lazy(() => import('./components/MoviesDetail'))
-// const Movies = lazy(() => import("./components/Movies"));
+const MoviesFavorite = lazy(() => import("./components/Movies/MoviesFavorite/MoviesFavorite"));
 
 const router = createBrowserRouter([
     {
@@ -26,16 +26,16 @@ const router = createBrowserRouter([
                     </ErrorBoundary>
                 ),
             },
-            // {
-            //   path: "movies",
-            //   element: (
-            //     <ErrorBoundary fallback={<Error />}>
-            //       <Suspense fallback={<Spinners />}>
-            //         <Movies />
-            //       </Suspense>
-            //     </ErrorBoundary>
-            //   ),
-            // },
+            {
+              path: "movies/favorite",
+              element: (
+                <ErrorBoundary fallback={<Error />}>
+                  <Suspense fallback={<Spinners />}>
+                    <MoviesFavorite />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
             {
                 path: 'movies/:id',
                 element: (

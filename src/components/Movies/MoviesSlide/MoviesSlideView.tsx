@@ -1,13 +1,14 @@
 import { Badge } from 'react-bootstrap'
-import { IMoviesCard, IMoviesGenreData } from '../../interface/IMovies.ts'
+import { IMoviesCard, IMoviesGenreData } from '../../../interface/IMovies.ts'
 import Button from 'react-bootstrap/Button'
-import MoviesModalView from '../Modal/MoviesModalView.tsx'
+import MoviesModalView from '../../Modal/MoviesModalView.tsx'
 import { useState } from 'react'
 
 const MoviesSlideView = ({
     moviesCardClass,
     moviesCardData,
     moviesGenreData,
+    createMoviesData,
     deleteMutation,
     updateMutation,
 }: IMoviesCard & any) => {
@@ -37,6 +38,19 @@ const MoviesSlideView = ({
                     <div>{moviesCardData.vote_average}</div>
                     <div>{moviesCardData.adult ? '청불' : 'Under 18'}</div>
                 </div>
+                <Button
+                    className={moviesCardClass.carChildBtnClassName}
+                    variant={moviesCardClass.cardChildCreateBtnVariant}
+                    onClick={() => createMoviesData({
+                        'id': moviesCardData.id,
+                        'poster_path': moviesCardData.poster_path,
+                        'title': moviesCardData.title,
+                        'genre_ids': moviesCardData.genre_ids,
+                        'vote_average': moviesCardData.vote_average,
+                        'adult': moviesCardData.adult,
+                    })}>
+                    관심
+                </Button>
                 <Button
                     className={moviesCardClass.carChildBtnClassName}
                     variant={moviesCardClass.cardChildUpdateBtnVariant}

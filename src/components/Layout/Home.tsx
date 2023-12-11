@@ -1,5 +1,5 @@
 import Banner from "../Banner/Banner.tsx";
-import MoviesSlide from "../MoviesSlide/MoviesSlide.tsx";
+import MoviesSlide from "../Movies/MoviesSlide/MoviesSlide.tsx";
 import React from "react";
 import {useSuspenseQueries} from "@tanstack/react-query";
 import {

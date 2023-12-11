@@ -27,8 +27,8 @@ const Header = () => {
             <Link to="/" className="nav-item">
               Home
             </Link>
-            <Link to="/movies" className="nav-item">
-              Movies
+            <Link to="/movies/favorite" className="nav-item">
+              favorite
             </Link>
           </Nav>
           <Form className="d-flex">

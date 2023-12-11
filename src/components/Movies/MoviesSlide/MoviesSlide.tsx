@@ -1,9 +1,10 @@
 import 'react-multi-carousel/lib/styles.css'
-import { IMoviesCardData } from '../../interface/IMovies.ts'
+import { IMoviesCardData } from '../../../interface/IMovies.ts'
 import MoviesSlideView from './MoviesSlideView.tsx'
 import Carousel from 'react-multi-carousel'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { deleteMoviesData, updateMoviesData } from '../../server/Fetcher.ts'
+import { createMoviesData, deleteMoviesData, updateMoviesData } from '../../../server/Fetcher.ts'
+// import Toast from '../../Toast/Toast.tsx'
 
 const responsive = {
     superLargeDesktop: {
@@ -50,6 +51,51 @@ const MoviesSlide = ({ type, movieData, movieGenreData }: any) => {
         },
     })
 
+    // const { mutate: createMutate, isError: createMutateIsError, error: createMutateError } = useMutation({
+    const { mutate: createMutate } = useMutation({
+        mutationFn: (data: any) => {
+            return createMoviesData(type, data)
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [type],
+            })
+        },
+        onError: (data) => {
+            alert(data.message);
+        }
+    })
+
+    // todo : 토스트 메시지 팝업 관련하여, 테스트 진행 후 임시 주석
+    // if (createMutateIsError) {
+    //     const toastProps = {
+    //         isError: true,
+    //         type: {
+    //             style: 'error',
+    //             icon: true,
+    //         },
+    //         closable: true,
+    //         toastMessage: createMutateError.message,
+    //     }
+    //
+    //     return <Toast {...toastProps} />
+    // }
+
+
+    // const toastPopup = (message: string) => {
+    //     const toastProps = {
+    //         isError: true,
+    //         type: {
+    //             style: 'error',
+    //             icon: true,
+    //         },
+    //         closable: true,
+    //         toastMessage: message,
+    //     }
+    //
+    //     return <Toast {...toastProps} />;
+    // }
+
     // const deleteMutate = (id:number) => {
     // 	return useMutation({
     // 		mutationFn: () => {
@@ -93,6 +139,7 @@ const MoviesSlide = ({ type, movieData, movieGenreData }: any) => {
                         cardClassName: 'card',
                         cardChildClassName: 'overlay',
                         cardChildBadgeClassName: 'danger',
+                        cardChildCreateBtnVariant: 'outline-warning',
                         cardChildDeleteBtnVariant: 'outline-danger',
                         cardChildUpdateBtnVariant: 'outline-info',
                         carChildBtnClassName: 'button',
@@ -106,6 +153,7 @@ const MoviesSlide = ({ type, movieData, movieGenreData }: any) => {
                         adult: item?.adult,
                     }}
                     moviesGenreData={movieGenreData}
+                    createMoviesData={createMutate}
                     updateMutation={updateMutate}
                     deleteMutation={deleteMutate}
                 />

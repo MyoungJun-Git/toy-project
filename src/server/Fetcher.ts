@@ -4,6 +4,7 @@
  */
 
 import { ApiConfig } from '../api/ApiConfig'
+import { IMoviesCardData } from '../interface/IMovies.ts'
 
 /**
  * Movies 정보 반환
@@ -54,13 +55,32 @@ export const deleteMoviesData = async (
 export const updateMoviesData = async (
     moviesType: string,
     moviesId: number,
-    moviesTitle: any,
+    moviesTitle: string,
 ) => {
     const response = await ApiConfig.patch(moviesType + '/' + moviesId, {
         'title': moviesTitle,
     }).then(
         (res: any) => res.data,
     )
+    return response
+}
+
+export const createMoviesData = async (
+    moviesType: string,
+    reqData: IMoviesCardData,
+) => {
+    const response = await ApiConfig.post('/favorite', {
+        'movies_type': moviesType,
+        'id': reqData.id,
+        'poster_path': reqData.poster_path,
+        'title': reqData.title,
+        'genre_ids': reqData.genre_ids,
+        'vote_average': reqData.vote_average,
+        'adult': reqData.adult,
+    }).then(
+        (res: any) => res.data,
+    )
+
     return response
 }
 
