@@ -6,11 +6,11 @@
 // import MoviesSlideView from '../MoviesSlide/MoviesSlideView.tsx'
 
 import Banner from '../../Banner/Banner.tsx'
-import MoviesSlide from '../MoviesSlide/MoviesSlide.tsx'
+import MoviesSlide from '../../MoviesSlide/MoviesSlide.tsx'
 import { useSuspenseQueries } from '@tanstack/react-query'
 import {
     getFavoriteData, getGenreMoviesData,
-} from '../../../server/Fetcher.ts'
+} from '../../../../../server/Fetcher.ts'
 
 const MoviesFavorite = () => {
     /**

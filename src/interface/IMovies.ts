@@ -10,8 +10,7 @@ export interface IMoviesCardClass {
 export interface IMoviesGenreData {
     id: number
     name: string
-}
-;[]
+}[]
 
 export interface IMoviesCardData {
     id: number

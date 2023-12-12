@@ -3,11 +3,10 @@ import {
     NotificationGroup,
 } from '@progress/kendo-react-notification'
 import { Fade } from '@progress/kendo-react-animation'
-import { IToastMessage } from '../../interface/IToast.ts'
+import { IToastMessage } from '../../../../interface/IToast.ts'
 
 const ToastView = (toastViewProps: IToastMessage) => {
 // const ToastView = ({isError, type, closable, toastMessage, closeEvent}: IToastMessage) => {
-    console.log({ toastViewProps });
     // return (
     //     <NotificationGroup
     //         style={{

@@ -1,9 +1,9 @@
 import 'react-multi-carousel/lib/styles.css'
-import { IMoviesCardData } from '../../../interface/IMovies.ts'
+import { IMoviesCardData } from '../../../../interface/IMovies.ts'
 import MoviesSlideView from './MoviesSlideView.tsx'
 import Carousel from 'react-multi-carousel'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createMoviesData, deleteMoviesData, updateMoviesData } from '../../../server/Fetcher.ts'
+import { createMoviesData, deleteMoviesData, updateMoviesData } from '../../../../server/Fetcher.ts'
 // import Toast from '../../Toast/Toast.tsx'
 
 const responsive = {
@@ -33,10 +33,10 @@ const MoviesSlide = ({ type, movieData, movieGenreData }: any) => {
         mutationFn: (id: number) => {
             return deleteMoviesData(type, id)
         },
-        onSuccess: () => {
+        onSuccess: (data) => {
             alert('삭제 완료');
             queryClient.invalidateQueries({
-                queryKey: [type],
+                queryKey: [data._type],
             })
         },
     })
@@ -118,7 +118,6 @@ const MoviesSlide = ({ type, movieData, movieGenreData }: any) => {
     // 		value: string
     // 	}
     // }) => {
-    // 	console.log({data});
     // 	return useMutation({
     // 		mutationFn: () => {
     // 			return updateMoviesData(type, data.id, data.title.value);

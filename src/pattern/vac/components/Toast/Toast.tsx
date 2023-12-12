@@ -4,7 +4,7 @@
 
 import { useState } from 'react'
 import ToastView from './ToastView.tsx'
-import { IToast } from '../../interface/IToast.ts'
+import { IToast } from '../../../../interface/IToast.ts'
 
 /**
  *

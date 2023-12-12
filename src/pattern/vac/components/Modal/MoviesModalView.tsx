@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal'
-import { ImoviesModal } from '../../interface/IMovies.ts'
+import { ImoviesModal } from '../../../../interface/IMovies.ts'
 import { useRef } from 'react'
 import Button from 'react-bootstrap/Button'
 

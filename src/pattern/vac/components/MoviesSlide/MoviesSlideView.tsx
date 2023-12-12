@@ -1,7 +1,7 @@
 import { Badge } from 'react-bootstrap'
-import { IMoviesCard, IMoviesGenreData } from '../../../interface/IMovies.ts'
+import { IMoviesCard, IMoviesGenreData } from '../../../../interface/IMovies.ts'
 import Button from 'react-bootstrap/Button'
-import MoviesModalView from '../../Modal/MoviesModalView.tsx'
+import MoviesModalView from '../Modal/MoviesModalView.tsx'
 import { useState } from 'react'
 
 const MoviesSlideView = ({

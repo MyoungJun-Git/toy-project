@@ -49,7 +49,7 @@ export const deleteMoviesData = async (
     const response = await ApiConfig.delete(moviesType + '/' + moviesId).then(
         (res: any) => res.data,
     )
-    return response
+    return {...response, _type: moviesType}
 }
 
 export const updateMoviesData = async (
@@ -62,7 +62,7 @@ export const updateMoviesData = async (
     }).then(
         (res: any) => res.data,
     )
-    return response
+    return {...response, _type: moviesType}
 }
 
 export const createMoviesData = async (
@@ -82,7 +82,7 @@ export const createMoviesData = async (
         (res: any) => res.data,
     )
 
-    return response
+    return {...response, _type: moviesType}
 }
 
 export const getFavoriteData = async () => {
