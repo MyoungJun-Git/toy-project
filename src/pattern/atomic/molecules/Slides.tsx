@@ -6,6 +6,7 @@ import { ImoviesData, ImoviesGenreData, Islide } from '../../../interface/Imolec
 import Title from '../atoms/Title.tsx'
 import Badges from '../atoms/Badges.tsx'
 import Buttons from '../atoms/Buttons.tsx'
+import { useNavigate } from 'react-router-dom'
 
 const responsive = {
     superLargeDesktop: {
@@ -28,6 +29,8 @@ const responsive = {
 }
 
 const Slides = (slidesProps: Islide) => {
+    const navigate = useNavigate();
+
     return (
         <Carousel responsive={responsive}>
             {
@@ -40,7 +43,13 @@ const Slides = (slidesProps: Islide) => {
                                  `https://www.themoviedb.org/t/p/w355_and_h200_multi_faces${item.poster_path}` +
                                  ')',
                          }}
-                         // onClick={() => }
+                         onClick={() => {
+                             navigate(`/movies/detail/${item.id}`, {
+                                state: {
+                                    "id": item.id
+                                }
+                             });
+                         }}
                     >
                         <div className="overlay">
                             <Title type="h4" title={item.title} />
@@ -62,16 +71,19 @@ const Slides = (slidesProps: Islide) => {
                             <Buttons className="button"
                                      hidden={slidesProps.type === 'favorite'}
                                      variant={'outline-warning'}
-                                     onClick={() => slidesProps.createMutate({
-                                         'type': slidesProps.type,
-                                         'id': item.id,
-                                         'poster_path': item.poster_path,
-                                         'title': item.title,
-                                         'genre_ids': item.genre_ids,
-                                         'vote_average': item.vote_average,
-                                         'overview': item.overview,
-                                         'adult': item.adult,
-                                     })}>
+                                     onClick={(e: React.MouseEvent<HTMLElement>) => {
+                                         slidesProps.createMutate({
+                                             'type': slidesProps.type,
+                                             'id': item.id,
+                                             'poster_path': item.poster_path,
+                                             'title': item.title,
+                                             'genre_ids': item.genre_ids,
+                                             'vote_average': item.vote_average,
+                                             'overview': item.overview,
+                                             'adult': item.adult,
+                                         });
+                                         e.stopPropagation(); // todo: parent tag onClick !== child tag onClick
+                                     }}>
                                 관심
                             </Buttons>
                             <Buttons className="button"

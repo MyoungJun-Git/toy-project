@@ -9,6 +9,7 @@ import Error from './pattern/vac/components/Error/Error.tsx'
 import Spinners from './pattern/atomic/atoms/Spinners.tsx'
 import HomePage from './pattern/atomic/pages/HomePage.tsx'
 import FavoritePage from './pattern/atomic/pages/FavoritePage.tsx'
+import MoviesDetailPage from './pattern/atomic/pages/MoviesDetailPage.tsx'
 // import Spinners from './pattern/vac/components/Spinners/Spinners.tsx'
 
 const Home = lazy(() => import('./pattern/vac/components/Layout/Home.tsx'))
@@ -69,6 +70,16 @@ const router = createBrowserRouter([
                     <ErrorBoundary fallback={<Error />}>
                         <Suspense fallback={<Spinners {...spinnersProps} />}>
                             <FavoritePage />
+                        </Suspense>
+                    </ErrorBoundary>
+                ),
+            },
+            {
+                path: 'movies/detail/:id',
+                element: (
+                    <ErrorBoundary fallback={<Error />}>
+                        <Suspense fallback={<Spinners {...spinnersProps} />}>
+                            <MoviesDetailPage />
                         </Suspense>
                     </ErrorBoundary>
                 ),

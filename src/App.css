@@ -60,3 +60,43 @@ body {
 .movies_favorite {
     color: white;
 }
+
+.parent_detail {
+    color: white !important;
+}
+
+.detail {
+    display: flex;
+    width: 100%;
+    margin: 20px;
+}
+
+.detail_title {
+    font-size: 70px;
+    margin-left: 30px;
+    width: 100%;
+}
+
+.tag_line {
+    font-size: 30px;
+    margin-left: 30px;
+}
+
+.score-info {
+    margin-left: 30px;
+    width : 100%;
+    border-bottom:2px solid white;
+    padding-top: 10px;
+}
+
+.overview {
+    font-size: 16px;
+    width : 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-left: 30px;
+}
+
+.button-div {
+    margin-bottom: 10px;
+}

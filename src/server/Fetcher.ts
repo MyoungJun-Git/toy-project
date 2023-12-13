@@ -3,7 +3,7 @@
  *  ? Data Fetching 관련한 API Function들을 정의하는 file.
  */
 
-import { ApiConfig } from '../api/ApiConfig'
+import { ApiConfig, movieApiConfig } from '../api/ApiConfig'
 import { IMoviesCardData } from '../interface/IMovies.ts'
 
 /**
@@ -90,6 +90,13 @@ export const getFavoriteData = async () => {
         // `movie/popular?language=en-US&page=1`
         // `trending/movie/week?language=ko&page=1`
         `favorite`,
+    ).then((res: any) => res.data)
+    return response
+}
+
+export const getMovieDetailData = async (id: number) => {
+    const response = await movieApiConfig.get(
+        `movie/${id}?language=ko`
     ).then((res: any) => res.data)
     return response
 }
