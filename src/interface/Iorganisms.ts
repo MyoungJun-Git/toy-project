@@ -9,6 +9,7 @@ export interface IbannerBox {
 }
 
 export interface IslidesBox {
+    type?: string
     title: string
     createMutate: any
     updateMutate: any

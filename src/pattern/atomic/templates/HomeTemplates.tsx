@@ -17,9 +17,9 @@ const HomeTemplates = (homeProps:IhomeTemplate) => {
     return (
         <React.Fragment>
             <BannerBox {...homeProps.bannerBoxProps} />
-            <SlidesBox title="Top Popular Movies" createMutate={homeProps.createMutate} updateMutate={homeProps.updateMutate} deleteMutate={homeProps.deleteMutate} movieData={homeProps.popularData} genreData={homeProps.genreData} />
-            <SlidesBox title="Top Rated Movies" createMutate={homeProps.createMutate} updateMutate={homeProps.updateMutate} deleteMutate={homeProps.deleteMutate} movieData={homeProps.ratedData} genreData={homeProps.genreData} />
-            <SlidesBox title="Upcoming Movies" createMutate={homeProps.createMutate} updateMutate={homeProps.updateMutate} deleteMutate={homeProps.deleteMutate} movieData={homeProps.upcomingData} genreData={homeProps.genreData} />
+            <SlidesBox type="popular" title="Top Popular Movies" createMutate={homeProps.createMutate} updateMutate={homeProps.updateMutate} deleteMutate={homeProps.deleteMutate} movieData={homeProps.popularData} genreData={homeProps.genreData} />
+            <SlidesBox type="rated" title="Top Rated Movies" createMutate={homeProps.createMutate} updateMutate={homeProps.updateMutate} deleteMutate={homeProps.deleteMutate} movieData={homeProps.ratedData} genreData={homeProps.genreData} />
+            <SlidesBox type="upcoming" title="Upcoming Movies" createMutate={homeProps.createMutate} updateMutate={homeProps.updateMutate} deleteMutate={homeProps.deleteMutate} movieData={homeProps.upcomingData} genreData={homeProps.genreData} />
         </React.Fragment>
     )
 }

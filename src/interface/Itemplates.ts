@@ -15,3 +15,18 @@ export interface IhomeTemplate {
     upcomingData: ImoviesData[]
     genreData: ImoviesGenreData[]
 }
+
+export interface IfavoriteTemplate {
+    bannerBoxProps : {
+        bannerImagesClass: string
+        bannerContentClass: string
+        poster_path: string
+        title: string
+        overview: string
+    },
+    createMutate: any
+    updateMutate: any
+    deleteMutate: any
+    favoriteData: ImoviesData[]
+    genreData: ImoviesGenreData[]
+}

@@ -6,7 +6,8 @@ const SlidesBox = (slidesBoxProps: IslidesBox) => {
     return (
         <div>
             <Title type="h1" className="home" title={slidesBoxProps.title} />
-            <Slides createMutate={slidesBoxProps.createMutate}
+            <Slides type={slidesBoxProps.type}
+                    createMutate={slidesBoxProps.createMutate}
                     updateMutate={slidesBoxProps.updateMutate}
                     deleteMutate={slidesBoxProps.deleteMutate}
                     movieData={slidesBoxProps.movieData}

@@ -40,6 +40,7 @@ const Slides = (slidesProps: Islide) => {
                                  `https://www.themoviedb.org/t/p/w355_and_h200_multi_faces${item.poster_path}` +
                                  ')',
                          }}
+                         // onClick={() => }
                     >
                         <div className="overlay">
                             <Title type="h4" title={item.title} />
@@ -74,7 +75,7 @@ const Slides = (slidesProps: Islide) => {
                                 관심
                             </Buttons>
                             <Buttons className="button"
-                                     hidden={false}
+                                     hidden={true}
                                      variant={'outline-info'}
                                      onClick={slidesProps.updateMutate}>
                                 수정
@@ -82,7 +83,10 @@ const Slides = (slidesProps: Islide) => {
                             <Buttons className="button"
                                      hidden={false}
                                      variant={'outline-danger'}
-                                     onClick={slidesProps.deleteMutate}>
+                                     onClick={() => slidesProps.deleteMutate({
+                                        'id': item.id,
+                                        'type': slidesProps.type
+                                     })}>
                                 삭제
                             </Buttons>
                         </div>
