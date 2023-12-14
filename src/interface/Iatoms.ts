@@ -38,3 +38,7 @@ export interface Ibadge {
     name?: string
 }
 
+export interface Iimages {
+    src: string
+    alt: string
+}

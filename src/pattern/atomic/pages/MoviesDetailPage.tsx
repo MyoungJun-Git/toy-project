@@ -9,6 +9,7 @@ import { getMovieDetailData } from '../../../server/Fetcher.ts'
 import Badges from '../atoms/Badges.tsx'
 import Content from '../atoms/Content.tsx'
 import Icons from '../atoms/Icons.tsx'
+import Images from '../atoms/images.tsx'
 
 const MoviesDetailPage = () => {
     const data = useLocation()
@@ -24,9 +25,7 @@ const MoviesDetailPage = () => {
             <Container>
                 <Row>
                     <Col>
-                        <img
-                            src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${moviesDetailData.poster_path}`}
-                            alt={'images..'} />
+                        <Images src={`https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${moviesDetailData.poster_path}`} alt="images.." />
                     </Col>
                     <Col>
                         <div className="parent_detail">
@@ -63,7 +62,6 @@ const MoviesDetailPage = () => {
                                     {moviesDetailData.adult ? '청불' : 'Under 18'}
                                 </span>
                                 <div className={'overview'}>{moviesDetailData.overview}</div>
-
                             </div>
                         </div>
                     </Col>
