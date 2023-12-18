@@ -1,25 +1,13 @@
 import FavoriteTemplates from '../templates/FavoriteTemplates.tsx'
-import { useMutation, useQueryClient, useSuspenseQueries } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
-    createMoviesData, deleteMoviesData, getFavoriteData, getGenreMoviesData, updateMoviesData,
+    createMoviesData, deleteMoviesData, updateMoviesData,
 } from '../../../server/Fetcher.ts'
+import { useMoviesQuery } from '../../../hooks/useMoviesQuery.ts'
 
 const FavoritePage = () => {
-    const queryClient = useQueryClient()
-
-    const results = useSuspenseQueries({
-        queries: [
-            {
-                queryKey: ['favorite'],
-                queryFn: getFavoriteData,
-            },
-            {
-                queryKey: ['genre'],
-                queryFn: getGenreMoviesData,
-            },
-        ],
-    })
-
+    const queryClient = useQueryClient();
+    const { moviesFavoriteData, moviesGenreData } = useMoviesQuery();
 
     const { mutate: createMutate } = useMutation({
         mutationFn: (data: any) => {
@@ -68,13 +56,12 @@ const FavoritePage = () => {
         },
     });
 
-
     const bannerBoxProps = {
         bannerImagesClass: 'banner',
         bannerContentClass: 'banner-info',
-        poster_path: results[0].data[0]?.poster_path,
-        title: results[0].data[0]?.title,
-        overview: results[0].data[0]?.overview,
+        poster_path: moviesFavoriteData[0]?.poster_path,
+        title: moviesFavoriteData[0]?.title,
+        overview: moviesFavoriteData[0]?.overview,
     }
 
     const favoriteTemplateProps = {
@@ -82,8 +69,8 @@ const FavoritePage = () => {
         createMutate: createMutate,
         updateMutate: updateMutate,
         deleteMutate: deleteMutate,
-        favoriteData: results[0].data,
-        genreData: results[1].data,
+        favoriteData: moviesFavoriteData,
+        genreData: moviesGenreData,
     }
 
     return (

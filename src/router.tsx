@@ -10,6 +10,7 @@ import Spinners from './pattern/atomic/atoms/Spinners.tsx'
 import HomePage from './pattern/atomic/pages/HomePage.tsx'
 import FavoritePage from './pattern/atomic/pages/FavoritePage.tsx'
 import MoviesDetailPage from './pattern/atomic/pages/MoviesDetailPage.tsx'
+import InfiniteScrollPage from './pattern/atomic/pages/InfiniteScrollPage.tsx'
 // import Spinners from './pattern/vac/components/Spinners/Spinners.tsx'
 
 const Home = lazy(() => import('./pattern/vac/components/Layout/Home.tsx'))
@@ -84,11 +85,16 @@ const router = createBrowserRouter([
                     </ErrorBoundary>
                 ),
             },
-
-            //<Link to="/home/atomic" className="nav-item">
-            //                             Home (Atomic)
-            //                         </Link>
-            //                         <Link to="/movies/favorite/atomic" className="nav-item">
+            {
+                path: 'movies/infinite',
+                element: (
+                    <ErrorBoundary fallback={<Error />}>
+                        <Suspense fallback={<Spinners {...spinnersProps} />}>
+                            <InfiniteScrollPage />
+                        </Suspense>
+                    </ErrorBoundary>
+                ),
+            },
         ],
     },
 ])

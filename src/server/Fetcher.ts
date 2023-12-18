@@ -5,6 +5,7 @@
 
 import { ApiConfig, movieApiConfig } from '../api/ApiConfig'
 import { IMoviesCardData } from '../interface/IMovies.ts'
+import { useSuspenseQueries } from '@tanstack/react-query'
 
 /**
  * Movies 정보 반환
@@ -100,6 +101,33 @@ export const getMovieDetailData = async (id: number) => {
     ).then((res: any) => res.data)
     return response
 }
+
+export const useGetMoviesQueries = () => {
+    const results = useSuspenseQueries({
+        queries: [
+            {
+                queryKey: ['popular'],
+                queryFn: getMoviesData,
+            },
+            {
+                queryKey: ['rated'],
+                queryFn: getTopRatedMoviesData,
+            },
+            {
+                queryKey: ['upcoming'],
+                queryFn: getUpcomingMoviesData,
+            },
+            {
+                queryKey: ['genre'],
+                queryFn: getGenreMoviesData,
+            },
+        ],
+    });
+
+    return results;
+}
+
+
 
 // ! exmaple..
 // export const deleteMoviesData = async (moviesId: number) => {

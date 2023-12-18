@@ -1,35 +1,21 @@
 import HomeTemplate from '../templates/HomeTemplates.tsx'
-import { useMutation, useQueryClient, useSuspenseQueries } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
     createMoviesData, deleteMoviesData,
-    getGenreMoviesData,
-    getMoviesData,
-    getTopRatedMoviesData,
-    getUpcomingMoviesData, updateMoviesData,
+    updateMoviesData,
 } from '../../../server/Fetcher.ts'
-const HomePage = () => {
-    const results = useSuspenseQueries({
-        queries: [
-            {
-                queryKey: ['popular'],
-                queryFn: getMoviesData,
-            },
-            {
-                queryKey: ['rated'],
-                queryFn: getTopRatedMoviesData,
-            },
-            {
-                queryKey: ['upcoming'],
-                queryFn: getUpcomingMoviesData,
-            },
-            {
-                queryKey: ['genre'],
-                queryFn: getGenreMoviesData,
-            },
-        ],
-    })
+import { useMoviesQuery } from '../../../hooks/useMoviesQuery.ts'
 
-    const queryClient = useQueryClient();
+const HomePage = () => {
+    // todo : network는 1번 OK >> console.log >> 8번???? > 왜일까?
+    /**
+     * todo : 경우의 수
+     *  case 1: useGetMoviesQueries(); 호출 하는 컴포넌트가 2개.. > 로그 상 4개씩 찍힐까?
+     */
+
+    const { moviesData: results, moviesGenreData } = useMoviesQuery();
+
+    const queryClient = useQueryClient()
     const { mutate: deleteMutate } = useMutation({
         mutationFn: (data: {
             id: number,
@@ -38,7 +24,7 @@ const HomePage = () => {
             return deleteMoviesData(data.type, data.id)
         },
         onSuccess: (data) => {
-            alert('삭제 완료');
+            alert('삭제 완료')
             queryClient.invalidateQueries({
                 queryKey: [data._type],
             })
@@ -67,22 +53,22 @@ const HomePage = () => {
             return createMoviesData(data.type, data)
         },
         onSuccess: (data) => {
-            alert('관심 추가 완료');
+            alert('관심 추가 완료')
             queryClient.invalidateQueries({
                 queryKey: [data._type],
             })
         },
         onError: (data) => {
-            alert(data.message);
-        }
+            alert(data.message)
+        },
     })
 
     const bannerBoxProps = {
         bannerImagesClass: 'banner',
         bannerContentClass: 'banner-info',
-        poster_path: results[0].data[0]?.poster_path,
-        title: results[0].data[0]?.title,
-        overview: results[0].data[0]?.overview,
+        poster_path: results[0][0]?.poster_path,
+        title: results[0][0]?.title,
+        overview: results[0][0]?.overview,
     }
 
     const homeTemplateProps = {
@@ -90,10 +76,10 @@ const HomePage = () => {
         createMutate: createMutate,
         updateMutate: updateMutate,
         deleteMutate: deleteMutate,
-        popularData: results[0].data,
-        ratedData: results[2].data,
-        upcomingData: results[1].data,
-        genreData: results[3].data
+        popularData: results[0],
+        ratedData: results[1],
+        upcomingData: results[2],
+        genreData: moviesGenreData,
     }
 
     return (

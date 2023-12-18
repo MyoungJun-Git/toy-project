@@ -6,8 +6,32 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+// import { useQueryClient } from '@tanstack/react-query'
+// import { getMoviesData } from '../../../../server/Fetcher.ts'
 
 const Header = () => {
+    // const queryClient = useQueryClient();
+
+    // useMoviesQueries();
+
+
+
+    const seacrhEvent = () => {
+        // todo : 만약에 캐시된 데이터가 없으면 던져서 가져오는 경우
+        // const results = queryClient.ensureQueryData({
+        //     queryKey: ['popular'],
+        //     queryFn: getMoviesData
+        // });
+
+
+
+
+        // const results = queryClient.getQueriesData({
+        //     queryKey: ['popular']
+        // });
+        // console.log({results});
+    }
+
     return (
         <Navbar expand="lg" bg="dark" variant="dark">
             <Container fluid>
@@ -37,6 +61,9 @@ const Header = () => {
                         <Link to="/movies/favorite/atomic" className="nav-item">
                             favorite (Atomic)
                         </Link>
+                        <Link to="/movies/infinite" className="nav-item">
+                            Infinite Scroll
+                        </Link>
                     </Nav>
                     <Form className="d-flex">
                         <Form.Control
@@ -45,7 +72,7 @@ const Header = () => {
                             className="me-2"
                             aria-label="Search"
                         />
-                        <Button variant="outline-danger">Search</Button>
+                        <Button variant="outline-danger" onClick={() => seacrhEvent()}>Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Container>

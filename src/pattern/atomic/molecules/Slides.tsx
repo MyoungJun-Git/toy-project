@@ -95,10 +95,14 @@ const Slides = (slidesProps: Islide) => {
                             <Buttons className="button"
                                      hidden={false}
                                      variant={'outline-danger'}
-                                     onClick={() => slidesProps.deleteMutate({
-                                        'id': item.id,
-                                        'type': slidesProps.type
-                                     })}>
+                                     onClick={(e:React.MouseEvent<HTMLElement>) => {
+                                         slidesProps.deleteMutate({
+                                             'id': item.id,
+                                             'type': slidesProps.type
+                                         })
+                                         e.stopPropagation(); // todo: parent tag onClick !== child tag onClick
+                                     }}
+                            >
                                 삭제
                             </Buttons>
                         </div>

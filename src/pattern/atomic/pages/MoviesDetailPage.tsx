@@ -4,21 +4,36 @@ import Container from 'react-bootstrap/Container'
 import { Col, Row } from 'react-bootstrap'
 
 import { useLocation } from 'react-router-dom'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { getMovieDetailData } from '../../../server/Fetcher.ts'
 import Badges from '../atoms/Badges.tsx'
 import Content from '../atoms/Content.tsx'
 import Icons from '../atoms/Icons.tsx'
 import Images from '../atoms/images.tsx'
+import { useMoviesQuery } from '../../../hooks/useMoviesQuery.ts'
+// import { useMoviesDetailQuery } from '../../../hooks/useMoviesQuery.ts'
 
 const MoviesDetailPage = () => {
     const data = useLocation()
     const id = data.state.id
 
-    const { data: moviesDetailData } = useSuspenseQuery({
-        queryKey: [id],
-        queryFn: () => getMovieDetailData(id),
-    })
+    // const client = useQueryClient();
+    // const moviesDetailData = client.ensureQueryData({
+    //     queryKey: [id],
+    //     queryFn: () => getMovieDetailData(id),
+    // })
+    //
+    // console.log(moviesDetailData);
+
+    // const {data: moviesDetailData } = useMoviesDetailQuery(id);
+    // const { data: moviesDetailData } = useSuspenseQuery({
+    //     queryKey: [id],
+    //     queryFn: () => getMovieDetailData(id),
+    //     // staleTime: 1000,
+    //     // refetchInterval: 1000 * 60, // todo : 1분 주기 refetch..
+    // })
+
+    const { useMoviesDetailData } = useMoviesQuery();
+    const moviesDetailResult = useMoviesDetailData(id);
+    const moviesDetailData = moviesDetailResult.data;
 
     return (
         <div>
