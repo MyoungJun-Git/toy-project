@@ -1,6 +1,7 @@
 import { ApiConfig, movieApiConfig } from '../api/ApiConfig'
-import { useSuspenseQueries, useSuspenseQuery } from '@tanstack/react-query'
+import { useMutation, useQueryClient, useSuspenseQueries, useSuspenseQuery } from '@tanstack/react-query'
 import { queryKeys } from '../api/QueryKeys.ts'
+import { IMoviesCardData } from '../interface/IMovies.ts'
 
 /**
  * todo : axios 정의
@@ -27,7 +28,7 @@ const axiosFn = {
         ).then((res: any) => res.data)
     },
     getFavoriteData: async () => {
-        return await  ApiConfig.get(
+        return await ApiConfig.get(
             `favorite`
         ).then((res: any) => res.data)
     },
@@ -36,12 +37,28 @@ const axiosFn = {
             `movie/${id}?language=ko`,
         ).then((res: any) => res.data)
     },
+    addMoviesFavorite: async (data: IMoviesCardData) => {
+        return await ApiConfig.post(
+            `/${queryKeys.favorite}`,
+            {
+                'movies_type': data.type,
+                'id': data.id,
+                'poster_path': data.poster_path,
+                'title': data.title,
+                'genre_ids': data.genre_ids,
+                'vote_average': data.vote_average,
+                'overview': data.overview,
+                'adult': data.adult,
+            }
+        ).then((res: any) => res.data)
+    }
 }
 
 /**
  * todo : custom hooks > react query fetching
  */
 const useMoviesQuery = () => {
+    const client = useQueryClient();
     // ? 영화 (popular, rated, upcoming) data 가져오기..
     const { data: moviesData,  } = useSuspenseQueries({
         queries: [
@@ -94,7 +111,23 @@ const useMoviesQuery = () => {
         })
     };
 
-    return { moviesData, moviesGenreData, moviesFavoriteData, useMoviesDetailData }
+    // ? 영화 관심 추가
+    const { mutate: addMoviesFavoriteMutate } = useMutation({
+        mutationFn: (data: IMoviesCardData) => {
+            return axiosFn.addMoviesFavorite(data);
+        },
+        onSuccess: () => {
+            alert('관심 추가 완료!');
+            client.invalidateQueries({
+                queryKey: [queryKeys.favorite],
+            });
+        },
+        onError: error => alert(error.message)
+    });
+
+    // todo : update || delete 개발
+
+    return { moviesData, moviesGenreData, moviesFavoriteData, useMoviesDetailData, addMoviesFavoriteMutate }
 }
 
 export { useMoviesQuery }

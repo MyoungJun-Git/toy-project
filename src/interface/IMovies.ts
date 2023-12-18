@@ -13,6 +13,7 @@ export interface IMoviesGenreData {
 }[]
 
 export interface IMoviesCardData {
+    type: string
     id: number
     poster_path: string
     title: string

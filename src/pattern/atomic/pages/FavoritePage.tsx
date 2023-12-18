@@ -1,28 +1,28 @@
 import FavoriteTemplates from '../templates/FavoriteTemplates.tsx'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
-    createMoviesData, deleteMoviesData, updateMoviesData,
+    deleteMoviesData, updateMoviesData,
 } from '../../../server/Fetcher.ts'
 import { useMoviesQuery } from '../../../hooks/useMoviesQuery.ts'
 
 const FavoritePage = () => {
     const queryClient = useQueryClient();
-    const { moviesFavoriteData, moviesGenreData } = useMoviesQuery();
+    const { moviesFavoriteData, moviesGenreData, addMoviesFavoriteMutate } = useMoviesQuery();
 
-    const { mutate: createMutate } = useMutation({
-        mutationFn: (data: any) => {
-            return createMoviesData(data.type, data)
-        },
-        onSuccess: (data) => {
-            alert('관심 추가 완료')
-            queryClient.invalidateQueries({
-                queryKey: [data._type],
-            })
-        },
-        onError: (data) => {
-            alert(data.message)
-        },
-    });
+    // const { mutate: createMutate } = useMutation({
+    //     mutationFn: (data: any) => {
+    //         return createMoviesData(data.type, data)
+    //     },
+    //     onSuccess: (data) => {
+    //         alert('관심 추가 완료')
+    //         queryClient.invalidateQueries({
+    //             queryKey: [data._type],
+    //         })
+    //     },
+    //     onError: (data) => {
+    //         alert(data.message)
+    //     },
+    // });
 
     const { mutate: updateMutate } = useMutation({
         mutationFn: (data: {
@@ -66,7 +66,7 @@ const FavoritePage = () => {
 
     const favoriteTemplateProps = {
         bannerBoxProps: bannerBoxProps,
-        createMutate: createMutate,
+        createMutate: addMoviesFavoriteMutate,
         updateMutate: updateMutate,
         deleteMutate: deleteMutate,
         favoriteData: moviesFavoriteData,
