@@ -8,7 +8,24 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import App from './App.tsx'
 
-const queryClient = new QueryClient() // ! QueryClient 인스턴스 생성
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: 3, // ? retry 3회 request..
+            staleTime: (60 * 3 * 1000),
+            // ? 해당 캐싱되어있는 데이터를 언제까지 최신이라고 판단 할 것 인지? (default: 0) 계속 새롭게 refetching
+            gcTime: (60 * 1000),
+            // ? 만약에 캐싱되어있는 데이터를 사용하지 않을 경우, 정해진 시간 이후 캐시가 gc로 인해 삭제 됨. (default: 5분)
+        },
+        mutations: {
+            // ! mutation error 공통 관리
+            onError: (error, variables, context) => {
+                console.log(variables, context);
+                alert(error.message);
+            }
+        }
+    },
+})
 
 /**
  * ! devtools 설정

@@ -1,7 +1,6 @@
 import HomeTemplate from '../templates/HomeTemplates.tsx'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
-    deleteMoviesData,
     updateMoviesData,
 } from '../../../server/Fetcher.ts'
 import { useMoviesQuery } from '../../../hooks/useMoviesQuery.ts'
@@ -13,23 +12,23 @@ const HomePage = () => {
      *  case 1: useGetMoviesQueries(); 호출 하는 컴포넌트가 2개.. > 로그 상 4개씩 찍힐까?
      */
 
-    const { moviesData: results, moviesGenreData, addMoviesFavoriteMutate } = useMoviesQuery();
+    const { moviesData: results, moviesGenreData, addMoviesFavoriteMutate, deleteMoviesMutate } = useMoviesQuery();
 
     const queryClient = useQueryClient()
-    const { mutate: deleteMutate } = useMutation({
-        mutationFn: (data: {
-            id: number,
-            type: string
-        }) => {
-            return deleteMoviesData(data.type, data.id)
-        },
-        onSuccess: (data) => {
-            alert('삭제 완료')
-            queryClient.invalidateQueries({
-                queryKey: [data._type],
-            })
-        },
-    })
+    // const { mutate: deleteMutate } = useMutation({
+    //     mutationFn: (data: {
+    //         id: number,
+    //         type: string
+    //     }) => {
+    //         return deleteMoviesData(data.type, data.id)
+    //     },
+    //     onSuccess: (data) => {
+    //         alert('삭제 완료')
+    //         queryClient.invalidateQueries({
+    //             queryKey: [data._type],
+    //         })
+    //     },
+    // })
 
     const { mutate: updateMutate } = useMutation({
         mutationFn: (data: {
@@ -60,7 +59,7 @@ const HomePage = () => {
         bannerBoxProps: bannerBoxProps,
         createMutate: addMoviesFavoriteMutate,
         updateMutate: updateMutate,
-        deleteMutate: deleteMutate,
+        deleteMutate: deleteMoviesMutate,
         popularData: results[0],
         ratedData: results[1],
         upcomingData: results[2],

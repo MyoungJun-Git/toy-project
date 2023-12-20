@@ -29,7 +29,7 @@ const axiosFn = {
     },
     getFavoriteData: async () => {
         return await ApiConfig.get(
-            `favorite`
+            `favorite`,
         ).then((res: any) => res.data)
     },
     getMovieDetailData: async (id: number) => {
@@ -49,84 +49,121 @@ const axiosFn = {
                 'vote_average': data.vote_average,
                 'overview': data.overview,
                 'adult': data.adult,
-            }
+            },
         ).then((res: any) => res.data)
-    }
+    },
+    deleteMoviesData: async (data: {
+        type: string,
+        id: number,
+    }) => {
+        const resDeleteMoviesData = await ApiConfig.delete(
+            `${data.type}/${data.id}`,
+        ).then((res: any) => res.data)
+
+        return { ...resDeleteMoviesData, type: data.type }
+    },
 }
 
 /**
  * todo : custom hooks > react query fetching
+ *
+ * // ? 아래 3개의 항목은 (동일) queryKey 값으로 판단 됨.
+ *  * useQuery(['todos', { status, page }], ...)
+ *  * useQuery(['todos', { page, status }], ...)
+ *  * useQuery(['todos', { page, status, other: undefined }], ...)
+ *
+ * // ? 아래 3개의 항목은 (다른) queryKey 값으로 판단 됨.
+ *  * useQuery(['todos', status, page], ...)
+ *  * useQuery(['todos', page, status], ...)
+ *  * useQuery(['todos', undefined, page, status], ...)
  */
+
 const useMoviesQuery = () => {
-    const client = useQueryClient();
+    const client = useQueryClient()
     // ? 영화 (popular, rated, upcoming) data 가져오기..
-    const { data: moviesData,  } = useSuspenseQueries({
+    const { data: moviesData } = useSuspenseQueries({
         queries: [
             {
                 queryKey: [queryKeys.popular],
                 queryFn: axiosFn.getPopularData,
-                staleTime: (60 * 3 * 1000) // default: 0
             },
             {
                 queryKey: [queryKeys.rated],
                 queryFn: axiosFn.getRatedData,
-                staleTime: (60 * 3 * 1000) // default: 0
             },
             {
                 queryKey: [queryKeys.upcoming],
                 queryFn: axiosFn.getUpcomingData,
-                staleTime: (60 * 3 * 1000) // default: 0
-            }
+            },
         ],
         combine: (results) => {
             return {
                 data: results.map((result) => result.data),
                 pending: results.some((result) => result.isPending),
             }
-        }
-    });
+        },
+    })
 
     // ? 영화 장르 데이터
     const { data: moviesGenreData } = useSuspenseQuery({
         queryKey: [queryKeys.genre],
         queryFn: axiosFn.getGenreData,
-        staleTime: (60 * 3 * 1000),
-    });
+    })
 
     // ? 영화 관심 데이터
     const { data: moviesFavoriteData } = useSuspenseQuery({
         queryKey: [queryKeys.favorite],
         queryFn: axiosFn.getFavoriteData,
-        staleTime: (60 * 3 * 1000),
-    });
+    })
 
     // ? 영화 디테일 데이터
     const useMoviesDetailData = (id: number) => {
         return useSuspenseQuery({
             queryKey: [queryKeys.movies_detail, id],
             queryFn: () => axiosFn.getMovieDetailData(id),
-            staleTime: (60 * 3 * 1000), // ? 해당 캐싱되어있는 데이터를 언제까지 최신이라고 판단 할 것 인지? (default: 0) 계속 새롭게 refetching
-            gcTime: (60 * 1000), // ? 만약에 캐싱되어있는 데이터를 사용하지 않을 경우, 정해진 시간 이후 캐시가 gc로 인해 삭제 됨. (default: 5분)
         })
-    };
+    }
 
     // ? 영화 관심 추가
     const { mutate: addMoviesFavoriteMutate } = useMutation({
         mutationFn: (data: IMoviesCardData) => {
-            return axiosFn.addMoviesFavorite(data);
+            return axiosFn.addMoviesFavorite(data)
         },
         onSuccess: () => {
-            alert('관심 추가 완료!');
+            alert('관심 추가 완료!')
             client.invalidateQueries({
                 queryKey: [queryKeys.favorite],
-            });
+            })
         },
-        onError: error => alert(error.message)
-    });
+        // onError: error => alert(error.message)
+    })
 
-    // todo : update || delete 개발
+    // todo : delete 개발
+    const { mutate: deleteMoviesMutate } = useMutation({
+        mutationFn: (data: {
+            id: number,
+            type: string,
+        }) => {
+            return axiosFn.deleteMoviesData(data)
+        },
+        onSuccess: (data: {
+            type: string
+        }) => {
+            alert(`${data.type} 삭제 완료! `)
+            client.invalidateQueries({
+                queryKey: [data.type],
+            })
+        },
+    })
 
-    return { moviesData, moviesGenreData, moviesFavoriteData, useMoviesDetailData, addMoviesFavoriteMutate }
+    return {
+        moviesData,
+        moviesGenreData,
+        moviesFavoriteData,
+        useMoviesDetailData,
+        addMoviesFavoriteMutate,
+        deleteMoviesMutate,
+    }
 }
 
 export { useMoviesQuery }
