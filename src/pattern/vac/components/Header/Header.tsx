@@ -6,25 +6,31 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-// import { useQueryClient } from '@tanstack/react-query'
-// import { getMoviesData } from '../../../../server/Fetcher.ts'
 
 const Header = () => {
     // const queryClient = useQueryClient();
-
     // useMoviesQueries();
 
+    /**
+     * ? search Event..
+     *  ! 1. custom hooks에 대한 내용을 가져오기
+     *  ! 2. query client에 대한 내용을 가져오기
+     */
+    // const { moviesFavoriteData } = useMoviesQuery();
 
 
     const seacrhEvent = () => {
+        // const client = useQueryClient();
+        // client.getQueriesData({
+        //
+        // }).filter()
+
+
         // todo : 만약에 캐시된 데이터가 없으면 던져서 가져오는 경우
         // const results = queryClient.ensureQueryData({
         //     queryKey: ['popular'],
         //     queryFn: getMoviesData
         // });
-
-
-
 
         // const results = queryClient.getQueriesData({
         //     queryKey: ['popular']
